@@ -172,6 +172,17 @@
 	INFO[0043] You can now use it like this:
 	kubectl cluster-info
     ```
+    Cluster Info:
+    ```
+    ❯ kubectl cluster-info
+    Kubernetes master is running at https://0.0.0.0:59473
+    CoreDNS is running at https://0.0.0.0:59473/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+    Metrics-server is running at https://0.0.0.0:59473/api/v1/namespaces/kube-system/services/https:metrics-server:https/proxy
+    ```
+    
+    
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 * Prepare two vanilla VM's (No Kubernetes components installed) with the kubeadm binary installed (feel free to do this beforehand, I doubt it will be a requirement to add apt sources to get it)
 * Open browser tabs to https://kubernetes.io/docs/, https://github.com/kubernetes/ and  https://kubernetes.io/blog/ (these are permitted as per [the current guidelines](https://docs.linuxfoundation.org/tc-docs/certification/certification-resources-allowed#certified-kubernetes-administrator-cka-and-certified-kubernetes-application-developer-ckad))
 
