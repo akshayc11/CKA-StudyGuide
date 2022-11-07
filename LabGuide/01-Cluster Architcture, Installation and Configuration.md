@@ -6,172 +6,171 @@
   * Commands Run:
     ```bash
     ❯ k3d --help
-https://k3d.io/
-k3d is a wrapper CLI that helps you to easily create k3s clusters inside docker.
-Nodes of a k3d cluster are docker containers running a k3s image.
-All Nodes of a k3d cluster are part of the same docker network.
+    https://k3d.io/
+    k3d is a wrapper CLI that helps you to easily create k3s clusters inside docker.
+    Nodes of a k3d cluster are docker containers running a k3s image.
+    All Nodes of a k3d cluster are part of the same docker network.
+    
+    Usage:
+    k3d [flags]
+    k3d [command]
 
-Usage:
-  k3d [flags]
-  k3d [command]
+	Available Commands:
+	  cluster      Manage cluster(s)
+	  completion   Generate completion scripts for [bash, zsh, fish, powershell | psh]
+	  config       Work with config file(s)
+	  help         Help about any command
+	  image        Handle container images.
+	  kubeconfig   Manage kubeconfig(s)
+	  node         Manage node(s)
+	  registry     Manage registry/registries
+	  version      Show k3d and default k3s version
 
-Available Commands:
-  cluster      Manage cluster(s)
-  completion   Generate completion scripts for [bash, zsh, fish, powershell | psh]
-  config       Work with config file(s)
-  help         Help about any command
-  image        Handle container images.
-  kubeconfig   Manage kubeconfig(s)
-  node         Manage node(s)
-  registry     Manage registry/registries
-  version      Show k3d and default k3s version
+	Flags:
+	  -h, --help         help for k3d
+	      --timestamps   Enable Log timestamps
+	      --trace        Enable super verbose output (trace logging)
+	      --verbose      Enable verbose output (debug logging)
+	      --version      Show k3d and default k3s version
 
-Flags:
-  -h, --help         help for k3d
-      --timestamps   Enable Log timestamps
-      --trace        Enable super verbose output (trace logging)
-      --verbose      Enable verbose output (debug logging)
-      --version      Show k3d and default k3s version
+	Use "k3d [command] --help" for more information about a command.
+	❯ k3d
+	Usage:
+	  k3d [flags]
+	  k3d [command]
 
-Use "k3d [command] --help" for more information about a command.
-❯ k3d
-Usage:
-  k3d [flags]
-  k3d [command]
+	Available Commands:
+	  cluster      Manage cluster(s)
+	  completion   Generate completion scripts for [bash, zsh, fish, powershell | psh]
+	  config       Work with config file(s)
+	  help         Help about any command
+	  image        Handle container images.
+	  kubeconfig   Manage kubeconfig(s)
+	  node         Manage node(s)
+	  registry     Manage registry/registries
+	  version      Show k3d and default k3s version
 
-Available Commands:
-  cluster      Manage cluster(s)
-  completion   Generate completion scripts for [bash, zsh, fish, powershell | psh]
-  config       Work with config file(s)
-  help         Help about any command
-  image        Handle container images.
-  kubeconfig   Manage kubeconfig(s)
-  node         Manage node(s)
-  registry     Manage registry/registries
-  version      Show k3d and default k3s version
+	Flags:
+	  -h, --help         help for k3d
+	      --timestamps   Enable Log timestamps
+	      --trace        Enable super verbose output (trace logging)
+	      --verbose      Enable verbose output (debug logging)
+	      --version      Show k3d and default k3s version
 
-Flags:
-  -h, --help         help for k3d
-      --timestamps   Enable Log timestamps
-      --trace        Enable super verbose output (trace logging)
-      --verbose      Enable verbose output (debug logging)
-      --version      Show k3d and default k3s version
+	Use "k3d [command] --help" for more information about a command.
+	❯ k3d cluster --help
+	Manage cluster(s)
 
-Use "k3d [command] --help" for more information about a command.
-❯ k3d cluster --help
-Manage cluster(s)
+	Usage:
+	  k3d cluster [flags]
+	  k3d cluster [command]
 
-Usage:
-  k3d cluster [flags]
-  k3d cluster [command]
+	Available Commands:
+	  create      Create a new cluster
+	  delete      Delete cluster(s).
+	  edit        [EXPERIMENTAL] Edit cluster(s).
+	  list        List cluster(s)
+	  start       Start existing k3d cluster(s)
+	  stop        Stop existing k3d cluster(s)
 
-Available Commands:
-  create      Create a new cluster
-  delete      Delete cluster(s).
-  edit        [EXPERIMENTAL] Edit cluster(s).
-  list        List cluster(s)
-  start       Start existing k3d cluster(s)
-  stop        Stop existing k3d cluster(s)
+	Flags:
+	  -h, --help   help for cluster
 
-Flags:
-  -h, --help   help for cluster
+	Global Flags:
+	      --timestamps   Enable Log timestamps
+	      --trace        Enable super verbose output (trace logging)
+	      --verbose      Enable verbose output (debug logging)
 
-Global Flags:
-      --timestamps   Enable Log timestamps
-      --trace        Enable super verbose output (trace logging)
-      --verbose      Enable verbose output (debug logging)
+	Use "k3d cluster [command] --help" for more information about a command.
+	❯ k3d cluster create --help
 
-Use "k3d cluster [command] --help" for more information about a command.
-❯ k3d cluster create --help
+	Create a new k3s cluster with containerized nodes (k3s in docker).
+	Every cluster will consist of one or more containers:
+		- 1 (or more) server node container (k3s)
+		- (optionally) 1 loadbalancer container as the entrypoint to the cluster (nginx)
+		- (optionally) 1 (or more) agent node containers (k3s)
 
-Create a new k3s cluster with containerized nodes (k3s in docker).
-Every cluster will consist of one or more containers:
-	- 1 (or more) server node container (k3s)
-	- (optionally) 1 loadbalancer container as the entrypoint to the cluster (nginx)
-	- (optionally) 1 (or more) agent node containers (k3s)
+	Usage:
+	  k3d cluster create NAME [flags]
 
-Usage:
-  k3d cluster create NAME [flags]
+	Flags:
+	  -a, --agents int                                                     Specify how many agents you want to create
+	      --agents-memory string                                           Memory limit imposed on the agents nodes [From docker]
+	      --api-port [HOST:]HOSTPORT                                       Specify the Kubernetes API server port exposed on the LoadBalancer (Format: [HOST:]HOSTPORT)
+										- Example: `k3d cluster create --servers 3 --api-port 0.0.0.0:6550`
+	  -c, --config string                                                  Path of a config file to use
+	  -e, --env KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]                   Add environment variables to nodes (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
+										- Example: `k3d cluster create --agents 2 -e "HTTP_PROXY=my.proxy.com@server:0" -e "SOME_KEY=SOME_VAL@server:0"`
+	      --gpus string                                                    GPU devices to add to the cluster node containers ('all' to pass all GPUs) [From docker]
+	  -h, --help                                                           help for create
+	      --host-alias ip:host[,host,...]                                  Add ip:host[,host,...] mappings
+	      --host-pid-mode                                                  Enable host pid mode of server(s) and agent(s)
+	  -i, --image string                                                   Specify k3s image that you want to use for the nodes
+	      --k3s-arg ARG@NODEFILTER[;@NODEFILTER]                           Additional args passed to k3s command (Format: ARG@NODEFILTER[;@NODEFILTER])
+										- Example: `k3d cluster create --k3s-arg "--disable=traefik@server:0"
+	      --k3s-node-label KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]        Add label to k3s node (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
+										- Example: `k3d cluster create --agents 2 --k3s-node-label "my.label@agent:0,1" --k3s-node-label "other.label=somevalue@server:0"`
+	      --kubeconfig-switch-context                                      Directly switch the default kubeconfig's current-context to the new cluster's context (requires --kubeconfig-update-default) (default true)
+	      --kubeconfig-update-default                                      Directly update the default kubeconfig with the new cluster's context (default true)
+	      --lb-config-override strings                                     Use dotted YAML path syntax to override nginx loadbalancer settings
+	      --network string                                                 Join an existing network
+	      --no-image-volume                                                Disable the creation of a volume for importing images
+	      --no-lb                                                          Disable the creation of a LoadBalancer in front of the server nodes
+	      --no-rollback                                                    Disable the automatic rollback actions, if anything goes wrong
+	  -p, --port [HOST:][HOSTPORT:]CONTAINERPORT[/PROTOCOL][@NODEFILTER]   Map ports from the node containers (via the serverlb) to the host (Format: [HOST:][HOSTPORT:]CONTAINERPORT[/PROTOCOL][@NODEFILTER])
+										- Example: `k3d cluster create --agents 2 -p 8080:80@agent:0 -p 8081@agent:1`
+	      --registry-config string                                         Specify path to an extra registries.yaml file
+	      --registry-create NAME[:HOST][:HOSTPORT]                         Create a k3d-managed registry and connect it to the cluster (Format: NAME[:HOST][:HOSTPORT]
+										- Example: `k3d cluster create --registry-create mycluster-registry:0.0.0.0:5432`
+	      --registry-use stringArray                                       Connect to one or more k3d-managed registries running locally
+	      --runtime-label KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]         Add label to container runtime (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
+										- Example: `k3d cluster create --agents 2 --runtime-label "my.label@agent:0,1" --runtime-label "other.label=somevalue@server:0"`
+	  -s, --servers int                                                    Specify how many servers you want to create
+	      --servers-memory string                                          Memory limit imposed on the server nodes [From docker]
+	      --subnet 172.28.0.0/16                                           [Experimental: IPAM] Define a subnet for the newly created container network (Example: 172.28.0.0/16)
+	      --timeout duration                                               Rollback changes if cluster couldn't be created in specified duration.
+	      --token string                                                   Specify a cluster token. By default, we generate one.
+	  -v, --volume [SOURCE:]DEST[@NODEFILTER[;NODEFILTER...]]              Mount volumes into the nodes (Format: [SOURCE:]DEST[@NODEFILTER[;NODEFILTER...]]
+										- Example: `k3d cluster create --agents 2 -v /my/path@agent:0,1 -v /tmp/test:/tmp/other@server:0`
+	      --wait                                                           Wait for the server(s) to be ready before returning. Use '--timeout DURATION' to not wait forever. (default true)
 
-Flags:
-  -a, --agents int                                                     Specify how many agents you want to create
-      --agents-memory string                                           Memory limit imposed on the agents nodes [From docker]
-      --api-port [HOST:]HOSTPORT                                       Specify the Kubernetes API server port exposed on the LoadBalancer (Format: [HOST:]HOSTPORT)
-                                                                        - Example: `k3d cluster create --servers 3 --api-port 0.0.0.0:6550`
-  -c, --config string                                                  Path of a config file to use
-  -e, --env KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]                   Add environment variables to nodes (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
-                                                                        - Example: `k3d cluster create --agents 2 -e "HTTP_PROXY=my.proxy.com@server:0" -e "SOME_KEY=SOME_VAL@server:0"`
-      --gpus string                                                    GPU devices to add to the cluster node containers ('all' to pass all GPUs) [From docker]
-  -h, --help                                                           help for create
-      --host-alias ip:host[,host,...]                                  Add ip:host[,host,...] mappings
-      --host-pid-mode                                                  Enable host pid mode of server(s) and agent(s)
-  -i, --image string                                                   Specify k3s image that you want to use for the nodes
-      --k3s-arg ARG@NODEFILTER[;@NODEFILTER]                           Additional args passed to k3s command (Format: ARG@NODEFILTER[;@NODEFILTER])
-                                                                        - Example: `k3d cluster create --k3s-arg "--disable=traefik@server:0"
-      --k3s-node-label KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]        Add label to k3s node (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
-                                                                        - Example: `k3d cluster create --agents 2 --k3s-node-label "my.label@agent:0,1" --k3s-node-label "other.label=somevalue@server:0"`
-      --kubeconfig-switch-context                                      Directly switch the default kubeconfig's current-context to the new cluster's context (requires --kubeconfig-update-default) (default true)
-      --kubeconfig-update-default                                      Directly update the default kubeconfig with the new cluster's context (default true)
-      --lb-config-override strings                                     Use dotted YAML path syntax to override nginx loadbalancer settings
-      --network string                                                 Join an existing network
-      --no-image-volume                                                Disable the creation of a volume for importing images
-      --no-lb                                                          Disable the creation of a LoadBalancer in front of the server nodes
-      --no-rollback                                                    Disable the automatic rollback actions, if anything goes wrong
-  -p, --port [HOST:][HOSTPORT:]CONTAINERPORT[/PROTOCOL][@NODEFILTER]   Map ports from the node containers (via the serverlb) to the host (Format: [HOST:][HOSTPORT:]CONTAINERPORT[/PROTOCOL][@NODEFILTER])
-                                                                        - Example: `k3d cluster create --agents 2 -p 8080:80@agent:0 -p 8081@agent:1`
-      --registry-config string                                         Specify path to an extra registries.yaml file
-      --registry-create NAME[:HOST][:HOSTPORT]                         Create a k3d-managed registry and connect it to the cluster (Format: NAME[:HOST][:HOSTPORT]
-                                                                        - Example: `k3d cluster create --registry-create mycluster-registry:0.0.0.0:5432`
-      --registry-use stringArray                                       Connect to one or more k3d-managed registries running locally
-      --runtime-label KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]         Add label to container runtime (Format: KEY[=VALUE][@NODEFILTER[;NODEFILTER...]]
-                                                                        - Example: `k3d cluster create --agents 2 --runtime-label "my.label@agent:0,1" --runtime-label "other.label=somevalue@server:0"`
-  -s, --servers int                                                    Specify how many servers you want to create
-      --servers-memory string                                          Memory limit imposed on the server nodes [From docker]
-      --subnet 172.28.0.0/16                                           [Experimental: IPAM] Define a subnet for the newly created container network (Example: 172.28.0.0/16)
-      --timeout duration                                               Rollback changes if cluster couldn't be created in specified duration.
-      --token string                                                   Specify a cluster token. By default, we generate one.
-  -v, --volume [SOURCE:]DEST[@NODEFILTER[;NODEFILTER...]]              Mount volumes into the nodes (Format: [SOURCE:]DEST[@NODEFILTER[;NODEFILTER...]]
-                                                                        - Example: `k3d cluster create --agents 2 -v /my/path@agent:0,1 -v /tmp/test:/tmp/other@server:0`
-      --wait                                                           Wait for the server(s) to be ready before returning. Use '--timeout DURATION' to not wait forever. (default true)
-
-Global Flags:
-      --timestamps   Enable Log timestamps
-      --trace        Enable super verbose output (trace logging)
-      --verbose      Enable verbose output (debug logging)
+	Global Flags:
+	      --timestamps   Enable Log timestamps
+	      --trace        Enable super verbose output (trace logging)
+	      --verbose      Enable verbose output (debug logging)
     ```
   * Actual Command Run:
     ```bash
     ❯ k3d cluster create achandrashekaran-test -a 3 --agents-memory 2G
-INFO[0000] Prep: Network
-INFO[0000] Created network 'k3d-achandrashekaran-test'
-INFO[0000] Created image volume k3d-achandrashekaran-test-images
-INFO[0000] Starting new tools node...
-INFO[0002] Creating node 'k3d-achandrashekaran-test-server-0'
-INFO[0003] Pulling image 'ghcr.io/k3d-io/k3d-tools:5.4.6'
-INFO[0003] Pulling image 'docker.io/rancher/k3s:v1.24.4-k3s1'
-INFO[0009] Starting Node 'k3d-achandrashekaran-test-tools'
-INFO[0012] Creating node 'k3d-achandrashekaran-test-agent-0'
-INFO[0013] Creating node 'k3d-achandrashekaran-test-agent-1'
-INFO[0013] Creating node 'k3d-achandrashekaran-test-agent-2'
-INFO[0014] Creating LoadBalancer 'k3d-achandrashekaran-test-serverlb'
-INFO[0015] Pulling image 'ghcr.io/k3d-io/k3d-proxy:5.4.6'
-INFO[0018] Using the k3d-tools node to gather environment information
-INFO[0018] Starting new tools node...
-INFO[0018] Starting Node 'k3d-achandrashekaran-test-tools'
-INFO[0020] Starting cluster 'achandrashekaran-test'
-INFO[0020] Starting servers...
-INFO[0020] Starting Node 'k3d-achandrashekaran-test-server-0'
-INFO[0027] Starting agents...
-INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-2'
-INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-1'
-INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-0'
-INFO[0033] Starting helpers...
-INFO[0033] Starting Node 'k3d-achandrashekaran-test-serverlb'
-INFO[0040] Injecting records for hostAliases (incl. host.k3d.internal) and for 6 network members into CoreDNS configmap...
-INFO[0043] Cluster 'achandrashekaran-test' created successfully!
-INFO[0043] You can now use it like this:
-kubectl cluster-info
-
+	INFO[0000] Prep: Network
+	INFO[0000] Created network 'k3d-achandrashekaran-test'
+	INFO[0000] Created image volume k3d-achandrashekaran-test-images
+	INFO[0000] Starting new tools node...
+	INFO[0002] Creating node 'k3d-achandrashekaran-test-server-0'
+	INFO[0003] Pulling image 'ghcr.io/k3d-io/k3d-tools:5.4.6'
+	INFO[0003] Pulling image 'docker.io/rancher/k3s:v1.24.4-k3s1'
+	INFO[0009] Starting Node 'k3d-achandrashekaran-test-tools'
+	INFO[0012] Creating node 'k3d-achandrashekaran-test-agent-0'
+	INFO[0013] Creating node 'k3d-achandrashekaran-test-agent-1'
+	INFO[0013] Creating node 'k3d-achandrashekaran-test-agent-2'
+	INFO[0014] Creating LoadBalancer 'k3d-achandrashekaran-test-serverlb'
+	INFO[0015] Pulling image 'ghcr.io/k3d-io/k3d-proxy:5.4.6'
+	INFO[0018] Using the k3d-tools node to gather environment information
+	INFO[0018] Starting new tools node...
+	INFO[0018] Starting Node 'k3d-achandrashekaran-test-tools'
+	INFO[0020] Starting cluster 'achandrashekaran-test'
+	INFO[0020] Starting servers...
+	INFO[0020] Starting Node 'k3d-achandrashekaran-test-server-0'
+	INFO[0027] Starting agents...
+	INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-2'
+	INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-1'
+	INFO[0028] Starting Node 'k3d-achandrashekaran-test-agent-0'
+	INFO[0033] Starting helpers...
+	INFO[0033] Starting Node 'k3d-achandrashekaran-test-serverlb'
+	INFO[0040] Injecting records for hostAliases (incl. host.k3d.internal) and for 6 network members into CoreDNS configmap...
+	INFO[0043] Cluster 'achandrashekaran-test' created successfully!
+	INFO[0043] You can now use it like this:
+	kubectl cluster-info
     ```
 * Prepare two vanilla VM's (No Kubernetes components installed) with the kubeadm binary installed (feel free to do this beforehand, I doubt it will be a requirement to add apt sources to get it)
 * Open browser tabs to https://kubernetes.io/docs/, https://github.com/kubernetes/ and  https://kubernetes.io/blog/ (these are permitted as per [the current guidelines](https://docs.linuxfoundation.org/tc-docs/certification/certification-resources-allowed#certified-kubernetes-administrator-cka-and-certified-kubernetes-application-developer-ckad))
